@@ -1,6 +1,7 @@
 from turtle import Screen, Turtle
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 
@@ -15,6 +16,7 @@ screen.tracer(0)  #no display of animation
 r_paddle = Paddle((350, 0))
 l_paddle = Paddle((-350, 0))
 ball = Ball()
+score = Scoreboard()
 
 screen.listen()
 screen.onkey(r_paddle.go_up, "Up")
@@ -23,13 +25,6 @@ screen.onkey(r_paddle.go_down, "Down")
 screen.onkey(l_paddle.go_up, "w")
 screen.onkey(l_paddle.go_down, "s")
 
-
-## 3.Create another paddle
-## 4.Create a ball and move
-## 5.Detect collision with wall and bounce
-## 6.Detect collision with paddle
-## 7.Detect when paddle misses
-## 8.Keep score
 
 game_is_on = True
 while game_is_on:
@@ -48,11 +43,12 @@ while game_is_on:
     # detect if r_paddle misses
     if ball.xcor() > 380:
         ball.reset_position()
+        score.l_point()
 
     # detect if l_paddle misses
     if ball.xcor() < -380:
         ball.reset_position()
-
+        score.r_point()
 
 
 print('Pong Game!')
