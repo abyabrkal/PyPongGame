@@ -37,9 +37,13 @@ while game_is_on:
     screen.update()
     ball.move()
 
-    # detect collision with wall
+    # detect collision with top and bottom wall
     if ball.ycor() > 280 or ball.ycor() < -280:
-        ball.bounce()
+        ball.bounce_y()
+
+    # detect collision with r_paddle
+    if ball.xcor() > 320 and ball.distance(r_paddle) < 50 or ball.distance(l_paddle) < 50 and ball.xcor() < -320:
+        ball.bounce_x()
 
 
 print('Pong Game!')
